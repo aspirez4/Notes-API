@@ -29,7 +29,13 @@ end
 
 # create
 post '/api/notes' do
-  note = Notes.new(params['note'])
+  return 'You have to post something here :)' if params['title'].nil?
+  note = Notes.new(
+            title: params['title'],
+            content: params['content'],
+            label: params['label']
+  )
+
   note.save
   status 201
 end
@@ -38,7 +44,11 @@ end
 put '/api/notes/:id' do
   note = Notes.find(params[:id])
   return status 404 if note.nil?
-  note.update(params[:note])
+  note.update(
+      title: params['title'],
+      content: params['content'],
+      label: params['label']
+  )
   note.save
   status 202
 end
@@ -46,6 +56,7 @@ end
 delete '/api/notes/:id' do
   note = Notes.find(params[:id])
   return status 404 if note.nil?
+
   note.delete
   status 202
 end
