@@ -6,8 +6,7 @@ CREATE TABLE notes (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id),
 	title VARCHAR(500), 
-	content VARCHAR(10000), 
-	label VARCHAR(200)
+	content TEXT
 );
 
 CREATE TABLE labels (
@@ -15,5 +14,5 @@ CREATE TABLE labels (
 	PRIMARY KEY (id),
 	note_id INT,
 	FOREIGN KEY (note_id) REFERENCES notes(id),
-	title VARCHAR(100)
+	title VARCHAR(500)
 );
