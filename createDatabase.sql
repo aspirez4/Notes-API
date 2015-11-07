@@ -1,0 +1,19 @@
+CREATE DATABASE Notes;
+
+use Notes;
+
+CREATE TABLE notes (
+	id INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (id),
+	title VARCHAR(500), 
+	content VARCHAR(10000), 
+	label VARCHAR(200)
+);
+
+CREATE TABLE labels (
+	id INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (id),
+	note_id INT,
+	FOREIGN KEY (note_id) REFERENCES notes(id),
+	title VARCHAR(100)
+);
