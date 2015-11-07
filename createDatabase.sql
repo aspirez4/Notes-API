@@ -13,6 +13,6 @@ CREATE TABLE labels (
 	id INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (id),
 	note_id INT,
-	FOREIGN KEY (note_id) REFERENCES notes(id),
+	FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE,
 	title VARCHAR(500)
 );
