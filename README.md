@@ -1,5 +1,5 @@
-REST API for Notes management.
+# REST API for Notes management
 
-* Sinatra, MySQL, ActiveRecord
-
-** CRUD
+###Features
+* CRUD operations
+* Search by title/content/labels
