@@ -1,5 +1,4 @@
 require 'active_record'
-require 'pp'
 
 class Notes < ActiveRecord::Base
   def self.retrieve_element(id)
