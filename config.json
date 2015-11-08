@@ -1,0 +1,12 @@
+{
+  "sinatra_port": 8080,
+  "username": "admin",
+  "password": "password",
+  "db": {
+    "adapter": "mysql",
+    "host": "localhost",
+    "user": "root",
+    "password": "password",
+    "name": "Notes"
+  }
+}
