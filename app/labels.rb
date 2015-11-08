@@ -5,8 +5,8 @@ class Labels < ActiveRecord::Base
     labels = labels.split(',')
     labels.each do |label|
       Labels.create(
-          note_id: note_id,
-          label: label.strip
+        note_id: note_id,
+        label: label.strip
       )
     end
   end
