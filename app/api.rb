@@ -17,7 +17,6 @@ use Rack::Auth::Basic, 'Restricted Area' do |username, password|
   username == config['username'] && password == config['password']
 end
 
-
 ##################################
 # READ ALL
 ##################################
