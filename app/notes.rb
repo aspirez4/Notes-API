@@ -61,6 +61,6 @@ class Notes < ActiveRecord::Base
   end
 
   def self.search(par)
-    params.key?('label') ? search_with_label(par) : search_title_content(par)
+    par.key?('label') ? search_with_label(par) : search_title_content(par)
   end
 end

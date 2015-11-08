@@ -1,10 +1,12 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
-require_relative 'api_helper'
-require_relative 'settings'
 require_relative 'notes'
 require_relative 'labels'
+require_relative 'api_helper'
+
+include ApiHelper
+include Settings
 
 ##################################
 # CONFIG
@@ -32,7 +34,10 @@ get '/api/notes/:id' do
   result = Notes.retrieve_element(params[:id])
   if result.nil?
     status 404
-    return { error: 'Element with such ID do not exists!' }.to_json
+    return {
+      status: 404,
+      error: 'Element with such ID does not exist!'
+    }.to_json
   else
     status 200
     return result.to_json
@@ -43,7 +48,15 @@ end
 # SEARCH
 ##################################
 get '/api/search' do
-  result = Notes.search(request.env['rack.request.query_hash'])
+  params = request.env['rack.request.query_hash']
+
+  errors = ApiHelper.search_errors?(params)
+  unless errors.nil?
+    status errors.fetch(:status)
+    return errors.to_json
+  end
+
+  result = Notes.search(params)
   if result.nil?
     status 404
   else
@@ -57,9 +70,9 @@ end
 ##################################
 post '/api/notes/?' do
   errors = ApiHelper.post_errors?(params)
-  if errors
+  unless errors.nil?
     status errors.fetch(:status)
-    return errors.fetch(:error).to_json
+    return errors.to_json
   end
 
   note = Notes.create(
@@ -78,9 +91,9 @@ end
 ##################################
 put '/api/notes/:id' do
   errors = ApiHelper.put_errors?(params)
-  if errors
+  unless errors.nil?
     status errors.fetch(:status)
-    return errors.fetch(:error).to_json
+    return errors.to_json
   end
 
   note = Notes.find_by(note_id: params[:id])
@@ -103,5 +116,5 @@ delete '/api/notes/:id' do
   return status 404 if note.nil?
 
   note.delete
-  status 204
+  status 202
 end
