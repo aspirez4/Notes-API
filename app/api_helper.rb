@@ -40,7 +40,7 @@ module ApiHelper
 end
 
 module Settings
-  def parse(filename)
+  def load(filename)
     file = File.read(filename)
     config = JSON.parse(file)
 

@@ -12,7 +12,7 @@ include Settings
 # CONFIG
 ##################################
 CONFIG_PATH = '/home/admin-pc/development/notes-api/config/config.json'
-config = Settings.parse(CONFIG_PATH)
+config = Settings.load(CONFIG_PATH)
 set :port, config['sinatra_port']
 
 use Rack::Auth::Basic, 'Restricted Area' do |username, password|
