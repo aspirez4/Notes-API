@@ -21,6 +21,7 @@ bundle install
 ruby api.rb
 ```
 
+### Usage
 * Get top 1000
 http://localhost:4567/api/notes/
 
