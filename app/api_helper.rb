@@ -3,7 +3,7 @@ require 'active_record'
 require 'mysql'
 
 module ApiHelper
-  def post_errors?(params)
+  def check_post_errors(params)
     if params['title'].nil? && params['content'].nil?
       return {
         status: 400,
@@ -18,7 +18,7 @@ module ApiHelper
     nil
   end
 
-  def put_errors?(params)
+  def check_put_errors(params)
     if params['title'].nil? && params['content'].nil? && params['label'].nil?
       return {
         status: 400,
@@ -28,7 +28,7 @@ module ApiHelper
     nil
   end
 
-  def search_errors?(params)
+  def check_search_errors(params)
     if params['title'].nil? && params['content'].nil? && params['label'].nil?
       return {
         status: 404,

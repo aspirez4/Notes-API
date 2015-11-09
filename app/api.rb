@@ -50,7 +50,7 @@ end
 get '/api/search' do
   params = request.env['rack.request.query_hash']
 
-  errors = ApiHelper.search_errors?(params)
+  errors = ApiHelper.check_search_errors(params)
   unless errors.nil?
     status errors.fetch(:status)
     return errors.to_json
@@ -69,7 +69,7 @@ end
 # CREATE
 ##################################
 post '/api/notes/?' do
-  errors = ApiHelper.post_errors?(params)
+  errors = ApiHelper.check_post_errors(params)
   unless errors.nil?
     status errors.fetch(:status)
     return errors.to_json
@@ -90,7 +90,7 @@ end
 # UPDATE
 ##################################
 put '/api/notes/:id' do
-  errors = ApiHelper.put_errors?(params)
+  errors = ApiHelper.check_put_errors(params)
   unless errors.nil?
     status errors.fetch(:status)
     return errors.to_json
