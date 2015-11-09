@@ -118,3 +118,11 @@ delete '/api/notes/:id' do
   note.delete
   status 202
 end
+
+delete '/api/labels/:id' do
+  label = Labels.find_by(label_id: params[:id])
+  return status 404 if label.nil?
+
+  label.delete
+  status 202
+end

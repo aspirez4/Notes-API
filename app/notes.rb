@@ -6,7 +6,7 @@ class Notes < ActiveRecord::Base
 
     return nil if note.nil?
 
-    labels = Labels.where(note_id: note.note_id).pluck(:label)
+    labels = Labels.where(note_id: note.note_id).select(:label_id, :label)
     note = note.attributes
     note[:labels] = labels
 
