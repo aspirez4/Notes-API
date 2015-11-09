@@ -29,6 +29,7 @@ http://localhost:4567/api/notes/
 http://localhost:4567/api/notes/15
 
 * Search /may not work for some cases :D/
+
 http://localhost:4567/api/search?title=rutrum&content=congue&label=easy
 
 * POST / Create /
