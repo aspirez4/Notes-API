@@ -4,20 +4,9 @@ require 'json'
 require_relative 'notes'
 require_relative 'labels'
 require_relative 'api_helper'
+require_relative 'environment'
 
 include ApiHelper
-include Settings
-
-##################################
-# CONFIG
-##################################
-CONFIG_PATH = '/home/admin-pc/development/notes-api/config/config.json'
-config = Settings.load(CONFIG_PATH)
-set :port, config['sinatra_port']
-
-use Rack::Auth::Basic, 'Restricted Area' do |username, password|
-  username == config['username'] && password == config['password']
-end
 
 ##################################
 # READ ALL
@@ -30,7 +19,7 @@ end
 ##################################
 # READ
 ##################################
-get '/api/notes/:id' do
+get '/api/notes/:id/?' do
   result = Notes.retrieve_element(params[:id])
   if result.nil?
     status 404
@@ -89,7 +78,7 @@ end
 ##################################
 # UPDATE
 ##################################
-put '/api/notes/:id' do
+put '/api/notes/:id/?' do
   errors = ApiHelper.check_put_errors(params)
   unless errors.nil?
     status errors.fetch(:status)
@@ -111,7 +100,7 @@ end
 ##################################
 # DELETE
 ##################################
-delete '/api/notes/:id' do
+delete '/api/notes/:id/?' do
   note = Notes.find_by(note_id: params[:id])
   return status 404 if note.nil?
 
@@ -119,7 +108,7 @@ delete '/api/notes/:id' do
   status 202
 end
 
-delete '/api/labels/:id' do
+delete '/api/labels/:id/?' do
   label = Labels.find_by(label_id: params[:id])
   return status 404 if label.nil?
 
