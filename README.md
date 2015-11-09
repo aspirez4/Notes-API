@@ -12,11 +12,11 @@
 * Front end - Restful.js + React
 
 ### Install
-1. Install gems
+Install gems
 ```
 bundle install
 ```
-2. Adjust config.json to your environment then
+Adjust config.json to your environment then
 ```
 ruby api.rb
 ```
